@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    // get: tasks
     public function index(IndexTaskRequest $request)
     {
         $validated = $request->validated();
@@ -33,6 +34,7 @@ class TaskController extends Controller
         return TaskResource::collection($tasks);
     }
 
+    // get: tasks/{task}
     public function show(Request $request, int $task): TaskResource
     {
         $taskModel = Task::where('user_id', $request->user()->id)
@@ -42,6 +44,7 @@ class TaskController extends Controller
         return new TaskResource($taskModel);
     }
 
+    // post: tasks
     public function store(StoreTaskRequest $request): JsonResponse
     {
         $task = $request->user()->tasks()->create($request->validated());
@@ -52,6 +55,7 @@ class TaskController extends Controller
             ->setStatusCode(201);
     }
 
+    // put: tasks/{task}
     public function update(UpdateTaskRequest $request, int $task): TaskResource
     {
         $taskModel = Task::where('user_id', $request->user()->id)->findOrFail($task);
@@ -61,6 +65,7 @@ class TaskController extends Controller
         return new TaskResource($taskModel);
     }
 
+    // put: tasks/{task}/toggle
     public function toggle(Request $request, int $task): TaskResource
     {
         $taskModel = Task::where('user_id', $request->user()->id)->findOrFail($task);
@@ -75,6 +80,7 @@ class TaskController extends Controller
         return new TaskResource($taskModel);
     }
 
+    // delete: tasks/{task}
     public function destroy(Request $request, int $task): JsonResponse
     {
         $taskModel = Task::where('user_id', $request->user()->id)->findOrFail($task);

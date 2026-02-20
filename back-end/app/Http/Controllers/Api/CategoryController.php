@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
+    // get: categories
     public function index(): AnonymousResourceCollection
     {
         $categories = auth()->user()->categories()->latest('id')->get();
@@ -19,6 +20,7 @@ class CategoryController extends Controller
         return CategoryResource::collection($categories);
     }
 
+    // post: categories
     public function store(StoreCategoryRequest $request): JsonResponse
     {
         $category = auth()->user()->categories()->create($request->validated());
@@ -28,6 +30,7 @@ class CategoryController extends Controller
             ->setStatusCode(201);
     }
 
+    // putch: categories/{category}
     public function update(UpdateCategoryRequest $request, int $category): CategoryResource
     {
         $categoryModel = Category::where('user_id', auth()->id())->findOrFail($category);
@@ -36,6 +39,7 @@ class CategoryController extends Controller
         return new CategoryResource($categoryModel);
     }
 
+    // delete: categories/{category}
     public function destroy(int $category): JsonResponse
     {
         $categoryModel = Category::where('user_id', auth()->id())->findOrFail($category);
