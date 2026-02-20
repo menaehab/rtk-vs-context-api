@@ -8,12 +8,16 @@ import TaskList from "./pages/tasks/TaskList";
 import TaskCreate from "./pages/tasks/TaskCreate";
 import TaskEdit from "./pages/tasks/TaskEdit";
 import TaskShow from "./pages/tasks/TaskShow";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 function App() {
   return (
     <>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/categories">
             <Route index element={<CategoriesList />} />
             <Route path="create" element={<CategoriesCreate />} />
