@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div className=" bg-blue-700 text-white p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">Task Manager</h1>
+      <Link to="/" className="text-xl font-bold">Task Manager</Link>
       <nav className="space-x-4">
         <Link to="/categories" className="text-white hover:text-gray-300">
           Categories
@@ -14,6 +14,9 @@ export default function Navbar() {
         </Link>
         <Link to="/login" className="text-white hover:text-gray-300">
           Login
+        </Link>
+        <Link to="/register" className="text-white hover:text-gray-300">
+          Register
         </Link>
       </nav>
     </div>
